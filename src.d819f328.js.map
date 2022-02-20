@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":["DEBOUNCE_DELAY","inputSearchBox","document","querySelector"],"mappings":";;;AAIA,aAJA,QAAA,oBAEA,MAAMA,EAAiB,IAEjBC,EAAiBC,SAASC,cAAc","file":"src.d819f328.js","sourceRoot":"../src","sourcesContent":["import './css/styles.css';\n\nconst DEBOUNCE_DELAY = 300;\n\nconst inputSearchBox = document.querySelector('#search-box');\n"]}
