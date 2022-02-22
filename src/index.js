@@ -1,20 +1,21 @@
+const debounce = require('lodash.debounce');
 import './css/styles.css';
-
+import { fetchCountries } from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
 
 const inputSearchBox = document.querySelector('#search-box');
+inputSearchBox.addEventListener('input', debounce(onInputChange, 300));
 
-function fetchCountries(names) {
-  const BASIC_URL = 'https://restcountries.com/v3.1/';
-  return fetch(`${BASIC_URL}name/${names}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(response.message);
-      }
-      return response.json();
-    })
-    .then(states => states.map(state => state.name.common));
+fetchCountries();
+
+function createSearchQuery(str) {
+  return str + '?fields=name,capital,population,flags,languages';
 }
 
-console.log(fetchCountries('japan, peru'));
-// console.log(ArrayOfStates);
+function onInputChange(e) {
+  e.preventDefault();
+  
+  const userInput = inputSearchBox.value;
+  const querry = createSearchQuery(userInput);
+  fetchCountries(querry).then(states => console.log(states));
+}
