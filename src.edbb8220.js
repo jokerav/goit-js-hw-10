@@ -12,4 +12,4 @@ var t,e=arguments[3];!function(e,i){"function"==typeof t&&t.amd?t([],function(){
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./css/styles.css");var e=t(require("notiflix")),n=require("./fetchCountries");function t(e){return e&&e.__esModule?e:{default:e}}const i=require("lodash.debounce"),o=300,u=document.querySelector("#search-box");function a(e){return e.trim()+"?fields=name,capital,population,flags,languages"}function f(e){e.preventDefault();const t=u.value;if(""!=t){const e=a(t);(0,n.fetchCountries)(e).then(c)}}function c(n){n.length>=10&&e.default.Notify.info("Too many matches found. Please enter a more specific name."),n.length>1&&n.length<10&&s(n),1===n.length&&r(n)}function s(n){n.map(n=>e.default.Notify.success(n.name.official))}function r(n){e.default.Notify.warning(n[0].name.official)}u.addEventListener("input",i(f,300));
 },{"lodash.debounce":"PZFh","./css/styles.css":"krre","notiflix":"W3Ap","./fetchCountries":"SvwL"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-hw-10/src.edbb8220.js.map
+//# sourceMappingURL=/https:/jokerav.github.io/goit-js-hw-10/src.edbb8220.js.map
