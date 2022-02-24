@@ -39,7 +39,7 @@ function createStatesList(states) {
   states.map(state => {
     countryList.insertAdjacentHTML(
       'beforeend',
-      `<li class='stete-item'>${state.flags.png}${state.name.common}</li>`,
+      `<li class='stete-item'><img width = "70px"class="flag" src = "${state.flags.svg}"></img>${state.name.common}</li>`,
     );
   });
 }
