@@ -5,6 +5,7 @@ import { fetchCountries } from './fetchCountries';
 const DEBOUNCE_DELAY = 300;
 
 const countryList = document.querySelector('.country-list');
+const countryInfo = document.querySelector('.country-info');
 
 const inputSearchBox = document.querySelector('#search-box');
 inputSearchBox.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
@@ -45,8 +46,20 @@ function createStatesList(states) {
 }
 
 function showState(state) {
-  Notiflix.Notify.warning(state[0].name.common);
+  clearMarkup();
+  //Notiflix.Notify.warning(state[0].name.common);
+  countryInfo.insertAdjacentHTML(
+    'beforeend',
+    `
+  <img class = 'state-flag' src = "${state[0].flags.svg}" width = "120px"></img>
+  <p class = "state-name">${state[0].name.official}</p>
+  <p class = "state-prop">Capital: ${state[0].capital[0]}</p>
+  <p class = "state-prop">Population: ${state[0].population}</p>
+  <p class = "state-prop">Languages: ${Object.values(state[0].languages)} </p>
+  `,
+  );
 }
 function clearMarkup() {
   countryList.innerHTML = '';
+  countryInfo.innerHTML = '';
 }
