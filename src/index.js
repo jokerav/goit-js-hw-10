@@ -10,18 +10,24 @@ const countryInfo = document.querySelector('.country-info');
 const inputSearchBox = document.querySelector('#search-box');
 inputSearchBox.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
-function createSearchQuery(str) {
-  return str.trim() + '?fields=name,capital,population,flags,languages';
-}
-
 function onInputChange(e) {
   e.preventDefault();
   const userInput = inputSearchBox.value;
   if (userInput != '') {
     const querry = createSearchQuery(userInput);
-    fetchCountries(querry).then(createMarkup);
+    fetchCountries(querry)
+      .then(createMarkup)
+      .catch(() => {
+        clearMarkup();
+        Notiflix.Notify.failure('Oops, there is no country with that name');
+      });
   } else clearMarkup();
 }
+
+function createSearchQuery(str) {
+  return str.trim() + '?fields=name,capital,population,flags,languages';
+}
+
 function createMarkup(states) {
   if (states.length >= 10) {
     Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
@@ -35,7 +41,6 @@ function createMarkup(states) {
 }
 
 function createStatesList(states) {
-  //states.map(state => Notiflix.Notify.success(state.name.common));
   clearMarkup();
   states.map(state => {
     countryList.insertAdjacentHTML(
@@ -47,7 +52,6 @@ function createStatesList(states) {
 
 function showState(state) {
   clearMarkup();
-  //Notiflix.Notify.warning(state[0].name.common);
   countryInfo.insertAdjacentHTML(
     'beforeend',
     `
